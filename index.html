@@ -1,65 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dipayan Bhadra</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dipayan Bhadra — AI & Telecom</title>
+  <meta name="description" content="Portfolio and research site of Dipayan Bhadra: AI/ML, time-series forecasting, telecom & SCADA." />
+  <meta name="author" content="Dipayan Bhadra" />
+
+  <!-- Open Graph / SEO -->
+  <meta property="og:title" content="Dipayan Bhadra — AI & Telecom" />
+  <meta property="og:description" content="Portfolio and research site: AI/ML, time-series, telecom & RTU." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/og-image.png" />
+  <meta property="og:url" content="https://dipayanbhadra.github.io/" />
+
+  <!-- Favicon (replace with your files in /assets) -->
+  <link rel="icon" href="/assets/favicon.ico" />
+
+  <!-- Theme color for mobile -->
+  <meta name="theme-color" content="#0ea5e9" />
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f4f4;
-      color: #333;
+    /* ===== CSS RESET (modernized) ===== */
+    *,*::before,*::after{box-sizing:border-box}
+    body,h1,h2,h3,h4,p,figure,blockquote,dl,dd{margin:0}
+    ul[role='list'],ol[role='list']{list-style:none}
+    html:focus-within{scroll-behavior:smooth}
+    body{min-height:100vh;text-rendering:optimizeSpeed;line-height:1.6}
+    a:not([class]){text-decoration-skip-ink:auto}
+    img,picture{max-width:100%;display:block}
+    button,input,select,textarea{font:inherit}
+    @media (prefers-reduced-motion: reduce){html:focus-within{scroll-behavior:auto}}
+
+    /* ===== THEME ===== */
+    :root{
+      --bg:#0b1020;          /* dark base */
+      --bg-elev:#121a33;     /* dark elevated */
+      --txt:#e7ecf5;         /* text */
+      --muted:#a9b3c9;       /* subdued text */
+      --brand:#0ea5e9;       /* cyan */
+      --brand-2:#22d3ee;     /* accent */
+      --ring: rgba(34,211,238,.4);
+      --card:#0f172a;
+      --ok:#22c55e; --warn:#f59e0b; --bad:#ef4444;
+      --radius:16px;
+      --shadow: 0 10px 30px rgba(2,8,23,.35);
     }
-    header {
-      background: #005f73;
-      color: white;
-      padding: 2rem;
-      text-align: center;
+    /* light mode */
+    .light{
+      --bg:#f8fafc; --bg-elev:#ffffff; --txt:#0f172a; --muted:#000000; --brand:#0ea5e9; --brand-2:#0891b2; --card:#ffffff; --ring: rgba(14,165,233,.35);
     }
-    section {
-      padding: 2rem;
-      max-width: 800px;
-      margin: auto;
-      background: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #eee;
-      font-size: 0.9rem;
-    }
-    a {
-      color: #005f73;
-      text-decoration: none;
-    }
+
+    body{background:radial-gradient(90vw 60vh at 10% 0%, rgba(34,211,238,.08), transparent 60%),
+                    radial-gradient(80vw 60vh at 90% 10%, rgba(14,165,233,.09), transparent 60%),
+                    var(--bg); color:var(--txt); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";}
+
+    .container{width:min(1100px, 92%); margin-inline:auto}
+    .grid{display:grid; gap:1.2rem}
+    .btn{display:inline-flex; align-items:center; gap:.5rem; padding:.7rem 1rem; border-radius:999px; border:1px solid transparent; background:linear-gradient(180deg, var(--brand), var(--brand-2)); color:white; box-shadow:var(--shadow); cursor:pointer}
+    .btn.secondary{background:transparent; color:var(--txt); border-color:rgba(148,163,184,.3)}
+    .btn:focus-visible{outline:4px solid var(--ring)}
+
+    header{position:sticky; top:0; z-index:50; background:rgba(2,6,23,.6); backdrop-filter:saturate(180%) blur(10px); border-bottom:1px solid rgba(148,163,184,.15)}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:.75rem 0}
+    .nav a{color:var(--muted); text-decoration:none; font-weight:600; padding:.4rem .6rem; border-radius:8px}
+    .nav a:hover{color:var(--txt); background:rgba(148,163,184,.08)}
+    .brand{display:flex; gap:.6rem; align-items:center; font-weight:800; letter-spacing:.3px; color:var(--txt)}
+    .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(180deg,var(--brand),var(--brand-2)); box-shadow:0 0 0 4px rgba(34,211,238,.15)}
+
+    /* hero */
+    .hero{padding:clamp(3rem, 7vw, 6rem) 0}
+    .hero .wrap{display:grid; grid-template-columns: 1.2fr .8fr; gap:2rem}
+    .pill{display:inline-flex; align-items:center; gap:.5rem; padding:.35rem .7rem; border:1px solid rgba(148,163,184,.25); border-radius:999px; color:var(--muted); font-size:.9rem}
+    .title{font-size:clamp(2rem, 4vw, 3rem); line-height:1.15; letter-spacing:.3px}
+    .kicker{color:var(--muted)}
+    .hero-card{background:linear-gradient(180deg, rgba(14,165,233,.15), rgba(14,165,233,0) 60%), var(--card); border:1px solid rgba(148,163,184,.15); padding:1rem; border-radius:var(--radius); box-shadow:var(--shadow)}
+
+    /* sections */
+    section{padding:2.5rem 0}
+    .section-title{font-size:1.4rem; margin-bottom:.75rem}
+    .muted{color:var(--muted)}
+
+    /* cards */
+    .cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1rem}
+    .card{background:var(--card); border:1px solid rgba(148,163,184,.15); border-radius:var(--radius); padding:1rem; display:flex; flex-direction:column; gap:.7rem}
+    .tags{display:flex; flex-wrap:wrap; gap:.4rem}
+    .tag{font-size:.75rem; padding:.15rem .5rem; border-radius:999px; background:rgba(148,163,184,.15); color:var(--muted)}
+
+    /* timeline */
+    .timeline{position:relative; margin-left:1rem}
+    .timeline::before{content:""; position:absolute; left:0; top:.4rem; bottom:.4rem; width:2px; background:rgba(148,163,184,.25)}
+    .t-item{position:relative; padding-left:1.25rem; margin:.6rem 0}
+    .t-item::before{content:""; position:absolute; left:-5px; top:.45rem; width:10px; height:10px; background:linear-gradient(180deg,var(--brand),var(--brand-2)); border-radius:999px; box-shadow:0 0 0 3px rgba(34,211,238,.15)}
+
+    /* footer */
+    footer{padding:3rem 0; border-top:1px solid rgba(148,163,184,.14); color:var(--muted)}
+
+    /* small screens */
+    @media (max-width: 880px){ .hero .wrap{grid-template-columns:1fr} }
   </style>
 </head>
 <body>
   <header>
-    <h1>Dipayan Bhadra</h1>
-    <p>Engineer | Educator | AI Enthusiast</p>
+    <div class="container nav">
+      <a class="brand" href="#home"><span class="dot"></span> Dipayan Bhadra</a>
+      <nav class="links" aria-label="Primary">
+        <a href="#projects" color: purple>Projects</a>
+        <a href="#publications">Publications</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact</a>
+        <button id="themeBtn" class="btn secondary" aria-label="Toggle theme">🌗</button>
+      </nav>
+    </div>
   </header>
 
-  <section>
-    <h2>About Me</h2>
-    <p>I’m an Executive Engineer at Power Grid Bangladesh PLC and Adjunct Faculty at East West University. I specialize in project planning, fiber optic telecommunication technology, RTU system, Data Science and machine learning for applied forecasting.</p>
+  <main id="home" class="container">
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <span class="pill">AI/ML • Time‑Series • Telecom/RTU</span>
+          <h1 class="title" style="margin-top:.6rem">Hello, I’m Dipayan Bhadra — Executive Engineer & Adjunct Faculty building secure, data‑driven systems.</h1>
+          <img src="assets/profile.jpg" alt="Dipayan Bhadra" 
+     style="width:160px; border-radius:50%; border:3px solid #22d3ee; margin-bottom:1rem;">
+          <p class="kicker" style="margin-top:.8rem">I work at Power Grid Bangladesh (Telecom/RTU) and research hybrid neural architectures for real world apllications.</p>
+          <div style="display:flex; gap:.7rem; margin-top:1rem; flex-wrap:wrap">
+            <a class="btn" href="#projects">View Projects</a>
+            <a class="btn secondary" href="/assets/Dipayan-Bhadra-CV.pdf">Download CV</a>
+          </div>
+        </div>
+        <aside class="hero-card">
+          <h3>Quick Stats</h3>
+          <ul role="list" style="margin-top:.5rem; color:var(--muted); display:grid; gap:.35rem">
+            <li>⭐ Areas: Time‑series, Signal Processing, Security</li>
+            <li>🧪 Current: LSTM–Transformer–KAN hybrids</li>
+            <li>📚 Teaching: East West University / SUB</li>
+            <li>🔭 Goal: Resilient AI for grid & ICS</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
 
-    <h2>Projects</h2>
-    <ul>
-      <li><strong>Applied Regression & Time Series Forecasting:</strong> Modular Jupyter Notebooks for CSE 495</li>
-      <li><strong>Telecom & PMU Integration:</strong> Technical documentation and stakeholder communication</li>
-    </ul>
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects">
+      <h2 class="section-title">Selected Projects</h2>
+      <p class="muted">A few things I’ve built or am exploring. Filter by topic:</p>
+      <div style="margin:.8rem 0 1rem; display:flex; gap:.5rem; flex-wrap:wrap">
+        <button class="btn secondary" data-filter="all">All</button>
+        <button class="btn secondary" data-filter="ai">AI/ML</button>
+        <button class="btn secondary" data-filter="telecom">Telecom</button>
+        <button class="btn secondary" data-filter="tools">Tools</button>
+      </div>
 
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:dipu_dipayan@outlook.com">dipu_dipayan@outlook.com</a></p>
-    <p>GitHub: <a href="https://github.com/dipayan0">github.com/dipayan0</a></p>
-  </section>
+      <div class="cards" id="projectGrid">
+        <article class="card" data-tags="ai">
+          <h3>LSTM–mTrans–KAN Forecaster</h3>
+          <p>Hybrid deep model for electricity demand forecasting with uncertainty estimation and ablations.</p>
+          <div class="tags"><span class="tag">TensorFlow</span><span class="tag">Time‑Series</span><span class="tag">KAN</span></div>
+          <div style="margin-top:.4rem; display:flex; gap:.5rem"><a class="btn secondary" href="#">Code</a><a class="btn secondary" href="#">Paper</a></div>
+        </article>
+        <article class="card" data-tags="ai">
+          <h3>Backprop‑Free Training (Models 1.0–6)</h3>
+          <p>Exploratory algorithms for weight updates without gradient backpropagation; theory + prototypes.</p>
+          <div class="tags"><span class="tag">Research</span><span class="tag">Optimization</span></div>
+          <div style="margin-top:.4rem; display:flex; gap:.5rem"><a class="btn secondary" href="#">Notes</a></div>
+        </article>
+        <article class="card" data-tags="telecom">
+          <h3>PGCB FOX‑515/615 Upgrade</h3>
+          <p>Migration plan and SOPs for legacy multiplexers to modern transport with network resilience KPIs.</p>
+          <div class="tags"><span class="tag">SCADA</span><span class="tag">SOP</span></div>
+          <div style="margin-top:.4rem; display:flex; gap:.5rem"><a class="btn secondary" href="#">Report</a></div>
+        </article>
+        <article class="card" data-tags="tools">
+          <h3>UEURAT City Energy Dashboard</h3>
+          <p>Concept for IoT‑enabled urban energy & renewables tracker with GIS overlays and SDG metrics.</p>
+          <div class="tags"><span class="tag">Dashboard</span><span class="tag">GIS</span></div>
+          <div style="margin-top:.4rem; display:flex; gap:.5rem"><a class="btn secondary" href="#">Design</a></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== PUBLICATIONS ===== -->
+    <section id="publications">
+      <h2 class="section-title">Publications & Preprints</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Bangla Handwritten Character Recognition with CNN</h3>
+          <p class="muted">B.Sc./M.Sc. work; 50‑class recognition using 3‑conv + 2‑FC architecture.</p>
+          <div class="tags"><span class="tag">Computer Vision</span><span class="tag">Bangla</span></div>
+          <a class="btn secondary" href="#">PDF</a>
+        </article>
+        <article class="card">
+          <h3>Bangla Sentiment with CNN‑LSTM vs Transformer</h3>
+          <p class="muted">Comparative study on SentNoB dataset; ensemble analysis.</p>
+          <div class="tags"><span class="tag">NLP</span><span class="tag">Bangla</span></div>
+          <a class="btn secondary" href="#">PDF</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== TEACHING ===== -->
+    <section id="teaching">
+      <h2 class="section-title">Teaching</h2>
+      <div class="timeline">
+        <div class="t-item">
+          <strong>Adjunct Faculty — East West University</strong>
+          <div class="muted">Courses: Project Management, Electronics Circuits, Electronic Circuits Lab, Data Science Lab</div>
+        </div>
+        <div class="t-item">
+          <strong>Adjunct Faculty — State University of Bangladesh</strong>
+          <div class="muted">Courses: Applied Regression Analysis and Time Sereis Forecasting</div>
+        </div>
+         <div class="t-item">
+          <strong>Lecturer — Bangladesh University of Business and Technology</strong>
+          <div class="muted">Courses: Numerical Analysis, Engineering Electromagnetic, Continuous Signals and     	   Linear Systems, Energy Conversion I, Power Plant Engineering, Power System I & II, Communication System  	    Engineering, Optical Fiber Communication, Physics</div>
+        </div>
+       
+         <div class="t-item">
+          <strong>Lecturer — Prime University</strong>
+          <div class="muted">Courses: Circuit Theory, Control System, Engineering Electromagnetic, Electronics   	II</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== BLOG ===== -->
+    <section id="blog">
+      <h2 class="section-title">Notes & Blog</h2>
+      <p class="muted">Short write‑ups on research ideas and project logs.</p>
+      <div class="cards">
+        <article class="card">
+          <h3>Why Hybrid Models Help in Grid Forecasting</h3>
+          <p>Blending LSTM memory, Transformer context, and KAN local function approximation.</p>
+          <a class="btn secondary" href="#">Read</a>
+        </article>
+        <article class="card">
+          <h3>Designing SOPs for Critical Telecom Networks</h3>
+          <p>Balancing resilience, maintainability, and cost in live migrations.</p>
+          <a class="btn secondary" href="#">Read</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div class="grid" style="grid-template-columns: 1.3fr .7fr">
+        <form class="card" name="contact" data-netlify="true" netlify-honeypot="bot-field" method="POST">
+          <input type="hidden" name="form-name" value="contact" />
+          <p class="muted">Email me securely using the form, or via the links on the right.</p>
+          <label> Your Name <br>
+            <input name="name" required placeholder="Jane Doe" style="width:100%;padding:.7rem;border-radius:10px;border:1px solid rgba(148,163,184,.25);background:transparent;color:var(--txt)">
+          </label>
+          <label> Your Email <br>
+            <input name="email" type="email" required placeholder="jane@example.com" style="width:100%;padding:.7rem;border-radius:10px;border:1px solid rgba(148,163,184,.25);background:transparent;color:var(--txt)">
+          </label>
+          <label> Message <br>
+            <textarea name="message" rows="5" required placeholder="Hi Dipayan, I’d like to collaborate on…" style="width:100%;padding:.7rem;border-radius:10px;border:1px solid rgba(148,163,184,.25);background:transparent;color:var(--txt)"></textarea>
+          </label>
+          <div style="display:flex;gap:.6rem;align-items:center"><button class="btn" type="submit">Send</button><span class="muted" aria-live="polite" id="formMsg"></span></div>
+          <p hidden>
+            <label>Don’t fill this out: <input name="bot-field"></label>
+          </p>
+        </form>
+        <div class="card">
+          <h3>Elsewhere</h3>
+          <ul role="list" style="margin-top:.4rem; display:grid; gap:.35rem">
+            <li><a href="https://orcid.org/my-orcid?orcid=0009-0004-9844-3607" target="_blank">ORCiD Profile</a></li>
+            <li><a href="https://scholar.google.com/citations?user=XXtLbdQAAAAJ&hl=en/" target="_blank">Google Scholar</a></li>
+            <li><a href="https://www.researchgate.net/profile/Dipayan-Bhadra" target="_blank">ResearchGate</a></li>
+	    <li><a href="https://github.com/dipayan0" target="_blank">GitHub</a></li>
+            <li><a href="mailto:dipayan_bhadra@outlook.com">Email</a></li>
+            <li><a href="C:/Users/dipu_/OneDrive/Desktop/GitHub Page"></a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    &copy; 2025 Dipayan Bhadra. All rights reserved.
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+        <p>© <span id="yr"></span> Dipayan Bhadra • Built with ♥ on GitHub Pages</p>
+        <p><a class="muted" href="#home">Back to top ↑</a></p>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    // Year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Theme toggle (light/dark) with localStorage
+    const themeBtn = document.getElementById('themeBtn');
+    const setTheme = (theme) => {
+      document.documentElement.classList.toggle('light', theme === 'light');
+      localStorage.setItem('theme', theme);
+    };
+    const curr = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    setTheme(curr);
+    themeBtn.addEventListener('click', () => setTheme(document.documentElement.classList.contains('light') ? 'dark' : 'light'));
+
+    // Project filter
+    const grid = document.getElementById('projectGrid');
+    document.querySelectorAll('[data-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.getAttribute('data-filter');
+        [...grid.children].forEach(card => {
+          card.style.display = (key==='all' || card.dataset.tags.includes(key)) ? 'flex' : 'none';
+        });
+      });
+    });
+
+    // Simple Netlify form success message (works on static too if you later add AJAX)
+    const form = document.forms['contact'];
+    if(form){
+      form.addEventListener('submit', (e)=>{
+        document.getElementById('formMsg').textContent = 'Submitting…';
+      });
+    }
+  </script>
 </body>
 </html>
